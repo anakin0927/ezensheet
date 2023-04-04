@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const port = 80
+const port = 3000
 const mysql      = require('mysql');
 const connection = mysql.createConnection({
   host     : 'svc.sel3.cloudtype.app',
@@ -32,17 +32,20 @@ app.get('/', (req, res) => {
   //res.send('Main Page') //텍스트로 보내주는 형태
   res.render('view.html');
   //메인페이지 접속시 DB연결
-  connection.query('SELECT * FROM test', function (error, results, fields) {
-    if (error) throw error;
-    console.log(results);
-    res.send('Main Page ID2 : ' + results[0].id);
-  });
+  // connection.query('SELECT * FROM test', function (error, results, fields) {
+  //   if (error) throw error;
+  //   console.log(results);
+  //   res.send('Main Page ID2 : ' + results[0].id);
+  // });
 })
 
 app.get('/:menu', (req, res) => {
   const prm = req.params;
   console.log(prm.menu);
-  res.send(`<a href="/">HOME</a><h1>${prm.menu} Sub Page</h1>`);
+  res.send(`
+    <a href="/">HOME</a>
+    <h1>${prm.menu} Sub Page</h1>
+  `);
 })
 
 app.get('/1', (req, res) => {
